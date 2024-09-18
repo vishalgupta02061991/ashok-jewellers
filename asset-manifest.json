@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ashok-jewellers/static/css/main.45325da5.css",
+    "main.css": "/ashok-jewellers/static/css/main.8cd14681.css",
     "main.js": "/ashok-jewellers/static/js/main.9b3e0898.js",
     "static/js/453.5f2e647a.chunk.js": "/ashok-jewellers/static/js/453.5f2e647a.chunk.js",
     "index.html": "/ashok-jewellers/index.html",
-    "main.45325da5.css.map": "/ashok-jewellers/static/css/main.45325da5.css.map",
+    "main.8cd14681.css.map": "/ashok-jewellers/static/css/main.8cd14681.css.map",
     "main.9b3e0898.js.map": "/ashok-jewellers/static/js/main.9b3e0898.js.map",
     "453.5f2e647a.chunk.js.map": "/ashok-jewellers/static/js/453.5f2e647a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.45325da5.css",
+    "static/css/main.8cd14681.css",
     "static/js/main.9b3e0898.js"
   ]
 }
