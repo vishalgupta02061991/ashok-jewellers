@@ -1,0 +1,514 @@
+body {
+  background-color: #fff;
+}
+
+.App {
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.contentContainer {
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.showInvoice {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.outer-div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-bar {
+  margin-bottom: 1rem;
+}
+
+.grid-wrapper {
+  flex: 1 1 auto;
+}
+
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 5px 5px 0;
+  padding: 7px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.button-section {
+  margin-top: 3%;
+  text-align: center;
+}
+
+.heading {
+  font-size: 25px;
+  font-style: italic;
+
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: royalblue;
+}
+
+.remove {
+  background-color: rgb(192, 53, 53);
+}
+
+.remove:hover {
+  background-color: rgb(187, 43, 43);
+}
+
+.submit {
+  margin-left: 10px;
+}
+
+.button-section2 {
+  margin: 3%;
+}
+
+.totalSection {
+  margin-bottom: 10px;
+  margin-top: 20px;
+  text-align: right;
+  font-weight: 700;
+}
+
+input[type=text] {
+
+  margin-left: 10px;
+  vertical-align: middle;
+  margin: 5px 5px 5px 0;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.goldBtn,
+.makingCharge {
+  margin-left: 10px;
+}
+
+.goldPriceCont label {
+  margin: 5px 10px 5px 0;
+}
+
+button {
+  padding: 8px 10px 8px 10px !important;
+  border-radius: 5px;
+}
+
+.navbar {
+  background-color: grey !important;
+}
+
+.headerBar {
+  background-color: grey !important;
+  padding: 20px;
+}
+
+.headerC {
+  padding: 20px;
+  color: white;
+  font-size: 30px !important;
+  font-style: italic;
+  display: block !important;
+  text-align: center;
+}
+
+label {
+  font-weight: 700;
+}
+
+.footer {
+  background-color: grey !important;
+  color: white;
+  font-size: 30px !important;
+  font-style: italic;
+  display: block !important;
+  text-align: center;
+  padding: 20px;
+}
+
+.error {
+  color: red;
+  font-size: 18px;
+}
+
+.print,
+.mr-2 {
+  margin-right: 10px;
+}
+
+.headerText {
+  text-align: left;
+  font-size: 70px;
+  color: white;
+  font-style: italic;
+}
+
+.para {
+  font-size: 17x;
+  color: blue;
+  margin-bottom: 5px !important;
+}
+
+.phone {
+  text-align: right;
+}
+
+.headerBar {
+  background-color: grey !important;
+  padding: 20px;
+  text-align: right;
+  margin: 0;
+}
+
+.paraText {
+  padding: 0px 0 0px 40px;
+  font-size: 18px;
+}
+
+.textBar {
+  text-align: center;
+  font-size: 70px;
+  color: white;
+  font-style: italic;
+}
+
+.lastC td {
+  font-weight: 700;
+}
+
+.decimilarText {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.place input {
+  border-bottom: 2px dotted;
+  border-right: 0;
+  border-left: 0;
+  border-top: 0;
+  font-weight: 700;
+}
+
+.place input:focus-visible {
+  border-bottom: 2px dotted !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+}
+
+
+.decimilar {
+  text-align: left;
+}
+
+.branchD {
+  text-align: left;
+  font-weight: 500;
+}
+
+.branchD p {
+  margin-bottom: .5rem;
+
+}
+
+.para1 {
+  font-size: 17x;
+  margin-bottom: 2px !important;
+  color: #fff;
+}
+
+.GSTIN {
+  color: #fff;
+}
+
+.nameH {
+  font-size: 22px;
+}
+
+.headerParaText {
+  color: indigo;
+}
+
+.container1 {
+  width: 100%;
+  margin-top: 30px;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.ovrerflow {
+  overflow: auto;
+}
+
+.text-left {
+  text-align: left;
+  color: blue;
+  font-weight: 600;
+}
+
+.flex-row-container {
+  background: #aaa;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-row-container>.flex-row-item {
+  flex: 1 1 30%;
+  /*grow | shrink | basis */
+  height: 100px;
+}
+
+
+.row1 {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.col1 {
+  background-color: #ededed;
+  width: 25%;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+  flex: auto;
+}
+
+.col input {
+  margin-left: 20px;
+}
+
+.formClass {
+  padding: 20px;
+  border: 2px solid sandybrown;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.lastRowRemove {
+  margin-left: 10px;
+  padding-top: 22px
+}
+
+.itemTotalD,
+.goldPriceCont {
+  align-items: center;
+}
+
+.remove,
+.updateBtn {
+  padding: 5px 10px 6px 10px !important;
+}
+
+.updatePriceClass {
+  margin-left: 10px;
+  padding-top: 32px
+}
+
+.goldPriceCont {
+  padding: 15px;
+}
+
+.headerClass {
+  text-align: center;
+  color: crimson;
+}
+
+.headerClass h1 {
+  font-size: 3rem !important;
+}
+
+.mobile {
+  color: indigo;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.textRight {
+  text-align: right;
+  color: crimson;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.appraiser,
+th,
+.place label {
+  color: crimson;
+}
+
+.crimson {
+  color: crimson;
+}
+
+.valuation {
+  font-weight: 600;
+  ;
+  font-size: 17px;
+}
+
+.fontSize20 {
+  font-size: 18px;
+  ;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.appraiserText p {
+  color: crimson;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.backToPrev {
+  text-align: center;
+}
+
+.mobileGstContainer {
+  align-items: center;
+}
+
+.addSpace {
+  margin-left: 3%;
+  margin-right: 3%;
+  /* border: 3px solid crimson;
+    border-radius: 15px;
+    padding: 20px; */
+}
+
+.decimilar input {
+  width: 300px;
+}
+
+.datepic {
+  display: inline !important;
+}
+
+.branchDetails {
+  align-items: center;
+}
+
+.ml8 {
+  margin-left: 8px;
+}
+
+.infoBlock input {
+  width: 25% !important;
+  margin: 0px 5px 0px 5px;
+  font-weight: 700;
+}
+
+.info {
+  line-height: 40px;
+}
+
+.form-control:focus {
+  border-bottom: 2px dotted;
+  border-right: 0;
+  border-left: 0;
+  border-top: 0;
+  outline: 0;
+  box-shadow: none
+}
+
+.infoBlock input:focus,
+.place input:focus {
+  border-bottom: 2px dotted;
+  border-right: 0;
+  border-left: 0;
+  border-top: 0;
+  outline: 0;
+  box-shadow: none;
+}
+
+.alignContentRight {
+  text-align: right;
+}
+
+@page :first {
+  margin-top: .8in !important;
+  margin-bottom: .8in !important;
+}
+
+@page {
+  margin: .8in 0 !important;
+}
+
+@media only screen and (max-width: 500px) and (min-width: 100px) {
+  .col1 {
+    width: 100% !important;
+  }
+
+  .infoBlock input {
+    width: 100% !important;
+    margin: 0px 5px 0px 5px;
+  }
+
+  .branchDetails input {
+    width: 100% !important;
+  }
+
+  .addSpace {
+    padding: 25px;
+  }
+}

@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.grecaptcha-badge {
+  position: relative !important;
+  overflow: hidden !important;
+  /* right:0px !important */
+  right: -153px !important;
+  bottom: -25px !important
+}
+
+.container {
+  position: relative;
+}
+
+.submit {
+  background-color: blue;
+  color: white;
+  width: 106px;
+  height: 34px;
+  margin-top: 35px;
+}
+
+svg {
+  /* font-size: 4rem  !important;
+  color :#007bff; */
+}
+
+svg :hover {
+  /* color: #0056b3; */
+}
+
+.carousel-control-next {
+  transform: rotate(180deg);
+ 
+  /* transform: rotate(180deg); */
+  /* height: 50px;
+  width: 50px; */
+  /* .MuiSvgIcon-root {
+    font-size: 3.5rem  !important;
+  } */
+}
+
+.carousel-control-prev {
+  /* height: 50px;
+  width: 50px; */
+  /* .MuiSvgIcon-root {
+    font-size: 3.5rem  !important;
+  } */
+}
+
+img {
+  width: 35px;
+  height: 35px;
+}
