@@ -13,6 +13,8 @@ import { dropDownOptions } from './utils';
 import "react-datepicker/dist/react-datepicker.css";
 import border from './image/border16.png';
 
+//https://github.com/vishalgupta02061991/ashok-jewellers/settings/pages
+
 const App = () => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
