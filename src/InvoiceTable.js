@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { getCount } from './utils';
@@ -21,6 +20,7 @@ const InvoiceTable = ({ formValues, getTotalAmount, grandTotal }) => {
                 </thead>
                 <tbody>
                     {
+                        // eslint-disable-next-line
                         formValues && formValues.map((item, i) => {
                             if (item.name && item.quantity && item.weightInGrams) {
                                 return (
