@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import moment from 'moment'
+import DatePicker from "react-datepicker";
 import { useReactToPrint } from 'react-to-print';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -7,9 +8,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { Row, Col } from 'react-bootstrap';
 import InvoiceTable from './InvoiceTable';
-import Form from "react-bootstrap/Form";
 import Header from './Header';
 import { dropDownOptions } from './utils';
+import "react-datepicker/dist/react-datepicker.css";
+import border from './image/border16.png';
 
 const App = () => {
   const componentRef = useRef();
@@ -31,7 +33,7 @@ const App = () => {
   const [approveName, setApproveName] = useState('');
   const [shopPlace, setShopPlace] = useState('');
   const [accountNum, setAccountNum] = useState('');
-  
+
   useEffect(() => {
     const unloadCallback = (event) => {
       const e = event || window.event;
@@ -93,16 +95,16 @@ const App = () => {
     const weightInGrams = newFormValues[i]['weightInGrams'] ?? 0;
     const purity = newFormValues[i]['purity'] ?? 0;
     const g = Number(goldPrice)
-    const w = weightInGrams ? Number(weightInGrams)?.toFixed(5) : 0;
+    const w = weightInGrams ? Number(weightInGrams)?.toFixed(3) : 0;
     const p = Number(purity);
-    const goldPriceCartWise = Number(g * (p / 24))?.toFixed(5);
+    const goldPriceCartWise = Number(g * (p / 24))?.toFixed(3);
 
     const stoneW = newFormValues[i]['stoneWeight'] ?? 0;
     console.log(stoneW, 'pp123', w, w - stoneW)
     const stoneWeightNew = Number(stoneW);
-    const netWeightItem = (w - stoneWeightNew?.toFixed(5))?.toFixed(5);
+    const netWeightItem = (w - stoneWeightNew?.toFixed(3))?.toFixed(3);
 
-    const itemTotal = (netWeightItem * (goldPriceCartWise / 10)) > 0 ? (netWeightItem * (goldPriceCartWise / 10)).toFixed(5) : '';
+    const itemTotal = (netWeightItem * (goldPriceCartWise / 10)) > 0 ? (netWeightItem * (goldPriceCartWise / 10)).toFixed(3) : '';
     newFormValues[i]['itemTotal'] = Number(itemTotal)?.toFixed(4);
     newFormValues[i]['netWeightInGrams'] = netWeightItem
 
@@ -141,13 +143,13 @@ const App = () => {
         const weightInGrams = item['weightInGrams'] ?? 0;
         const purity = item['purity'] ?? 0;
         const g = Number(event.target.value);
-        const w = Number(weightInGrams).toFixed(5);
+        const w = Number(weightInGrams).toFixed(3);
         const p = Number(purity);
-        const goldPriceCartWise = Number(g * (p / 24))?.toFixed(5);
+        const goldPriceCartWise = Number(g * (p / 24))?.toFixed(3);
         const stoneW = item['stoneWeight'] ?? 0;
-        const stoneWeightNew = Number(stoneW).toFixed(5);
+        const stoneWeightNew = Number(stoneW).toFixed(3);
         console.log(stoneWeightNew, 'ss123')
-        const netWeightItem = (w - stoneWeightNew).toFixed(5);
+        const netWeightItem = (w - stoneWeightNew).toFixed(3);
         item['itemTotal'] = Number(netWeightItem * (goldPriceCartWise / 10)).toFixed(4);
         item['netWeightInGrams'] = netWeightItem;
         return item;
@@ -201,9 +203,10 @@ const App = () => {
   console.log(formValues, 'gh12')
   return (
     <div className='container1'>
-      <div ref={componentRef} className="addSpace">
+      <div ref={componentRef} className={`addSpace ${isShowInvoice ? `invoiceScreen2` : ``}`}>
         <Header />
 
+        {isShowInvoice && <hr className='divider' />}
         {!isShowInvoice && <div className="contentContainer mb-4 mt-3">
 
           <div className='text-center heading mt-3 mb-3'>
@@ -239,9 +242,10 @@ const App = () => {
 
                   </div>
                 </div>
-                <div class="col1" key={`${index}-weightInGrams`}>
+
+                <div class="col1" key={`${index}-netWeightInGrams`}>
                   <div>
-                    <label>Net Weight in gm</label>
+                    <label>Gross Weight in Gm</label>
                     <input type="text" name="weightInGrams" className='weightInGram dField' value={element?.weightInGrams || ""} onChange={e => handleAmount(index, e)} />
 
                   </div>
@@ -267,9 +271,9 @@ const App = () => {
 
                   </div>
                 </div>
-                <div class="col1" key={`${index}-netWeightInGrams`}>
+                <div class="col1" key={`${index}-weightInGrams`}>
                   <div>
-                    <label>Gross Weight in Gm</label>
+                    <label>Net Weight in gm</label>
                     <input type="text" name="netWeightInGrams" className='netWeightInGrams dField' value={element?.netWeightInGrams} readOnly />
 
                   </div>
@@ -315,7 +319,7 @@ const App = () => {
         {
           isShowInvoice &&
           <div className='showInvoice mt-1' >
-            <div className='text-center mb-3 mt-2'>
+            <div className='text-center mb-2 mt-2'>
               <h2 className='appraiser'>APPRAISER CERTIFICATE</h2>
             </div>
 
@@ -325,9 +329,9 @@ const App = () => {
               <div className='branchDetails d-flex'>
                 <div className='col-3 place '> <input type="text" name="branchName" value={branchName} onChange={(e) => setBranchName(e?.target?.value)} /> </div>
                 <div className='col-6 ml8'>Branch</div>
-                <div className='col-1 alignContentRight'><label>Ace No.</label></div>
+                <div className='col-1 alignContentRight'><label>Acc No.</label></div>
                 <div className='col-2 accountNum place'>
-                  <input type="text" name="accountNum" value={accountNum} onChange={(e) => setAccountNum(e?.target?.value)} /> 
+                  <input type="text" name="accountNum" value={accountNum} onChange={(e) => setAccountNum(e?.target?.value)} />
                 </div>
               </div>
               <div className='mt-3 place infoBlock'>
@@ -337,14 +341,16 @@ const App = () => {
                   <input type="text" name="parentName" value={parentName} onChange={(e) => setParentName(e?.target?.value)} /> Resident of
                   <input type="text" name="address" value={address} onChange={(e) => setAddress(e?.target?.value)} />
                   who has sought gold loan from the Bank is not my relative and the gold against which the loan is sought is not purchased from me.
-                  The ornaments/Coin have been weighted and appraised by me on <Form.Control
+                  The ornaments/Coin have been weighted and appraised by me on
+                  {/* <Form.Control
                     type="date"
                     name="purchaseDate"
                     placeholder="Purchase Date"
                     value={purchaseDate}
                     className="datepic purchaseDate"
                     onChange={(e) => setPurchaseDate(e.target.value)}
-                  />  in the presence of Sri/Smt
+                  /> */}
+                  <DatePicker selected={purchaseDate} onChange={(date) => setPurchaseDate(date)} dateFormat="dd/MM/yyyy" /> in the presence of Sri/Smt
                   <input type="text" name="approveName" value={approveName} onChange={(e) => setApproveName(e?.target?.value)} /> (Cash in charge) and the exact weight purity of the metal and the market value of each item as on date
                   are indicated below.
                 </div>
@@ -354,31 +360,32 @@ const App = () => {
               <InvoiceTable formValues={formValues} getTotalAmount={getTotalAmount} grandTotal={grandTotal} />
             </div>
 
-            <div className='decimilar mt-4 mb-4'>
+            <div className='decimilar mt-2 mb-3'>
               <div className='decimilarText mb-2'>
                 <p>Method(s) used for purity testing:</p>
                 <p>I solemnly declare that weight, purity of the gold ornaments/precious stones indicated above are corrent and</p>
                 <p> I undertake to indemnify Bank against any loss it may sustain on account of abt inaccuracy in the above appraisal.</p>
               </div>
-              <div className='place mt-3'>
+              <div className='place mt-2'>
                 <label>Place:</label>
                 <input type="text" name="shopPlace" value={shopPlace} onChange={(e) => setShopPlace(e?.target?.value)} />
               </div>
-              <div className='place mt-3'>
+              <div className='place mt-2'>
                 <label>Date:</label>
-                <Form.Control
+                {/* <Form.Control
                   type="date"
                   name="datepic"
                   placeholder="DateRange"
                   value={date}
                   className="datepic"
                   onChange={(e) => setDate(e.target.value)}
-                />
+                /> */}
+                <DatePicker selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/yyyy" />
               </div>
 
-              <div className='mt-4 d-flex'>
+              <div className='mt-3 d-flex'>
 
-                <div className='col-9'>
+                <div className='col-10'>
                   <div className='valuation'>
                     Valuation Fees Credited My Account No - <b className='crimson'>10761976651</b>
                   </div>
@@ -391,8 +398,8 @@ const App = () => {
                   </div>
                 </div>
 
-                <div className='col-3 appraiserText'>
-                  <div style={{ textAlign: "right" }}>
+                <div className='col-2 appraiserText'>
+                  <div style={{ textAlign: "left" }}>
                     <p > Your Faithfully</p>
                     <p> Appraiser </p>
                   </div>
@@ -404,7 +411,9 @@ const App = () => {
 
 
             </div>
-
+            <div className='mt-1'>
+              <img src={border} alt="Logo" className='imageClass' />
+            </div>
           </div>
         }
 

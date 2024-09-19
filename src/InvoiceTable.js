@@ -27,11 +27,11 @@ const InvoiceTable = ({ formValues, getTotalAmount, grandTotal }) => {
                                         <td>{i + 1}</td>
                                         <td>{item.name}</td>
                                         <td>{Number(item.quantity).toFixed(2)}</td>
-                                        <td>{Number(item?.weightInGrams)?.toFixed(5)}</td>
+                                        <td>{Number(item?.weightInGrams)?.toFixed(3)}</td>
 
-                                        <td>{Number(item?.stoneWeight)?.toFixed(5)}</td>
+                                        <td>{Number(item?.stoneWeight)?.toFixed(3)}</td>
                                         <td>{item.purity}</td>
-                                        <td>{Number(item.weightInGrams - item.stoneWeight).toFixed(5)}</td>
+                                        <td>{Number(item.weightInGrams - item.stoneWeight).toFixed(3)}</td>
                                         <td>{item.itemTotal}</td>
                                     </tr>
                                 )
@@ -44,11 +44,11 @@ const InvoiceTable = ({ formValues, getTotalAmount, grandTotal }) => {
 
                             <td>Total</td>
                             <td>{Number(getCount('quantity', formValues))?.toFixed(2)}</td>
-                            <td>{Number(getCount('weightInGrams', formValues))?.toFixed(5)}</td>
-                            <td>{Number(getCount('stoneWeight', formValues))?.toFixed(5)}</td>
+                            <td>{Number(getCount('weightInGrams', formValues))?.toFixed(3)}</td>
+                            <td>{Number(getCount('stoneWeight', formValues))?.toFixed(3)}</td>
 
                             <td>{''}</td>
-                            <td>{Number(getCount('netWeightInGrams', formValues))?.toFixed(5)}</td>
+                            <td>{Number(getCount('netWeightInGrams', formValues))?.toFixed(3)}</td>
                             <td>{getTotalAmount().toFixed(3)}</td>
                         </tr>
 

@@ -1,12 +1,24 @@
 import React from 'react';
-
+import logo from './logo.png';
 const Header = () => {
 
     return (
         <div className='headingContainer'>
             <div className='headerClass'>
-                <h1>  ASHOK JEWELLERS </h1>
+                <div className='headerLogo d-flex'>
+                    <div className='col-2' style={{ textAlign: "left" }}>
+                        <img src={logo} className="App-logo" alt="logo" style={{ height: "25" }} height={25} />
+                    </div>
+                    <div className='col-10'>
+                        <div className><h1 style={{ paddingRight: "15%" }}>  ASHOK JEWELLERS </h1>
+                            <div className='para headerParaText' style={{ paddingRight: "15%" }}>Deals in Gold & Silver Hallmark Jewellery </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <h1>  ASHOK JEWELLERS </h1>
                 <div className='para headerParaText mt-3' style={{ fontSize: "18px" }}>Deals in Gold & Silver Hallmark Jewellery </div>
+             */}
             </div>
             <div className='d-flex mobileGstContainer'>
                 <div className=' mt-2 col-9'>
