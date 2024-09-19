@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { getCount } from './utils';
