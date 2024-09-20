@@ -10,8 +10,8 @@ const Header = () => {
                         <img src={logo} className="App-logo" alt="logo" style={{ height: "25" }} height={25} />
                     </div>
                     <div className='col-10'>
-                        <div className><h1 style={{ paddingRight: "15%" }}>  ASHOK JEWELLERS </h1>
-                            <div className='para headerParaText' style={{ paddingRight: "15%" }}>Deals in Gold & Silver Hallmark Jewellery </div>
+                        <div className><h1 className='paddingRight15'>  ASHOK JEWELLERS </h1>
+                            <div className='para headerParaText paddingRight15'>Deals in Gold & Silver Hallmark Jewellery </div>
                         </div>
                     </div>
                 </div>

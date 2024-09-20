@@ -538,6 +538,10 @@ th,
   }
 }
 
+.paddingRight15 {
+  padding-right: 15%;
+}
+
 @media only screen and (max-width: 500px) and (min-width: 100px) {
   .col1 {
     width: 100% !important;
@@ -561,6 +565,10 @@ th,
   .mr-2 {
     margin-right: 0px;
   }
+  .paddingRight15 {
+    padding-right: 0px;
+  }
+  
 }
 
 .imageClass {
