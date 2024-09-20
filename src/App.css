@@ -555,6 +555,12 @@ th,
   .addSpace {
     padding: 25px;
   }
+  .headerLogo {
+    flex-direction: column !important;
+  }
+  .mr-2 {
+    margin-right: 0px;
+  }
 }
 
 .imageClass {
@@ -566,6 +572,7 @@ th,
 .headerLogo {
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 }
 
 /* 

@@ -207,6 +207,14 @@ const App = () => {
   return (
     <div className='container1'>
       <div ref={componentRef} className={`addSpace ${isShowInvoice ? `invoiceScreen2` : ``}`}>
+      
+      {/* { isShowInvoice &&
+      <div className='mt-1 headerImage'>
+              <img src={border} alt="Logo" className='imageClass' />
+      </div>
+
+      } */}
+        
         <Header />
 
         {isShowInvoice && <hr className='divider' />}
@@ -231,14 +239,14 @@ const App = () => {
           </div>
           <form className="p-10">
             {formValues.map((element, index) => (
-              <div class="row1 formClass">
-                <div class="col1" key={`${index}-name`}>
+              <div className="row1 formClass">
+                <div className="col1" key={`${index}-name`}>
                   <div>
                     <label>Name </label>
                     <input type="text" name="name" value={element?.name || ""} onChange={e => handleChange(index, e)} />
                   </div>
                 </div>
-                <div class="col1" key={`${index}-quantity`}>
+                <div className="col1" key={`${index}-quantity`}>
                   <div>
                     <label>Quantity</label>
                     <input type="text" className='quantity dField' min={0} name="quantity" value={element?.quantity} onChange={e => handleAmount(index, e)} />
@@ -246,43 +254,43 @@ const App = () => {
                   </div>
                 </div>
 
-                <div class="col1" key={`${index}-netWeightInGrams`}>
+                <div className="col1" key={`${index}-netWeightInGrams`}>
                   <div>
                     <label>Gross Weight in Gm</label>
                     <input type="text" name="weightInGrams" className='weightInGram dField' value={element?.weightInGrams || ""} onChange={e => handleAmount(index, e)} />
 
                   </div>
                 </div>
-                <div class="col1" key={`${index}-Stonesgm`}>
+                <div className="col1" key={`${index}-Stonesgm`}>
                   <div>
                     <label>Weight of Stones in gm</label>
                     <input type="text" name="stoneWeight" className='stoneWeight dField' value={element?.stoneWeight} onChange={e => handleAmount(index, e)} />
 
                   </div>
                 </div>
-                <div class="col1" key={`${index}-purity`}>
+                <div className="col1" key={`${index}-purity`}>
                   <div>
                     <label>Purity</label>
                     {/* <input type="text" name="purity" className='purity dField' value={element.purity || ""} onChange={e => handleAmount(index, e)} />
                      */}
 
-                    <select name="purity" class="form-select purity dField" value={element.purity || ""} onChange={e => handleAmount(index, e)}>
+                    <select name="purity" className="form-select purity dField" value={element.purity || ""} onChange={e => handleAmount(index, e)}>
                       {
-                        dropDownOptions()?.map(item => <option value={item.value}>{item.label}</option>)
+                        dropDownOptions()?.map(item => <option key={item.value} value={item.value}>{item.label}</option>)
                       }
                     </select>
 
                   </div>
                 </div>
-                <div class="col1" key={`${index}-weightInGrams`}>
+                <div className="col1" key={`${index}-weightInGrams`}>
                   <div>
                     <label>Net Weight in gm</label>
                     <input type="text" name="netWeightInGrams" className='netWeightInGrams dField' value={element?.netWeightInGrams} readOnly />
 
                   </div>
                 </div>
-                <div class="col1 d-flex itemTotalD " key={`${index}-itemTotal`}>
-                  <div className=''>
+                <div className="col1 d-flex itemTotalD " key={`${index}-itemTotal`}>
+                  <div>
                     <label>Item Total</label>
                     <input type="text" className='dField itemTotal' name="itemTotal" value={element?.itemTotal || ""} readOnly />
 
