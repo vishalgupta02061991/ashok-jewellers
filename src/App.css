@@ -568,6 +568,9 @@ th,
   .paddingRight15 {
     padding-right: 0px;
   }
+  .companyName {
+    width: 100%;
+  }
   
 }
 

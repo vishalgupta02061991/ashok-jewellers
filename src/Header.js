@@ -9,7 +9,7 @@ const Header = () => {
                     <div className='col-2' style={{ textAlign: "left" }}>
                         <img src={logo} className="App-logo" alt="logo" style={{ height: "25" }} height={25} />
                     </div>
-                    <div className='col-10'>
+                    <div className='col-10 companyName'>
                         <div className><h1 className='paddingRight15'>  ASHOK JEWELLERS </h1>
                             <div className='para headerParaText paddingRight15'>Deals in Gold & Silver Hallmark Jewellery </div>
                         </div>
