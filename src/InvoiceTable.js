@@ -27,7 +27,7 @@ const InvoiceTable = ({ formValues, getTotalAmount, grandTotal }) => {
                                     <tr key={i + 1}>
                                         <td>{i + 1}</td>
                                         <td>{item.name}</td>
-                                        <td>{Number(item.quantity).toFixed(2)}</td>
+                                        <td>{Number(item.quantity).toFixed(2)} Pc</td>
                                         <td>{Number(item?.weightInGrams)?.toFixed(3)}</td>
 
                                         <td>{Number(item?.stoneWeight)?.toFixed(3)}</td>
@@ -44,7 +44,7 @@ const InvoiceTable = ({ formValues, getTotalAmount, grandTotal }) => {
                             <td ></td>
 
                             <td>Total</td>
-                            <td>{Number(getCount('quantity', formValues))?.toFixed(2)}</td>
+                            <td>{Number(getCount('quantity', formValues))?.toFixed(2)} Pc</td>
                             <td>{Number(getCount('weightInGrams', formValues))?.toFixed(3)}</td>
                             <td>{Number(getCount('stoneWeight', formValues))?.toFixed(3)}</td>
 
