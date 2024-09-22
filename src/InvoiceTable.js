@@ -31,7 +31,7 @@ const InvoiceTable = ({ formValues, getTotalAmount, grandTotal }) => {
                                         <td>{Number(item?.weightInGrams)?.toFixed(3)}</td>
 
                                         <td>{Number(item?.stoneWeight)?.toFixed(3)}</td>
-                                        <td>{item.purity}</td>
+                                        <td>{item.purity} K</td>
                                         <td>{Number(item.weightInGrams - item.stoneWeight).toFixed(3)}</td>
                                         <td>{item.itemTotal}</td>
                                     </tr>
