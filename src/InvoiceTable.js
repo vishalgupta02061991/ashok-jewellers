@@ -11,7 +11,7 @@ const InvoiceTable = ({ formValues, getTotalAmount, grandTotal }) => {
                         <th>SI. No.</th>
                         <th>Description of the Article</th>
                         <th>Quantity</th>
-                        <th>Gross Weight</th>
+                        <th>Gross Weight (Grams)</th>
                         <th>Approximate weight of the precious stones in the ornaments (Grams)</th>
                         <th>Purity (CARAT)</th>
                         <th>Net Weight (Grams)</th>
