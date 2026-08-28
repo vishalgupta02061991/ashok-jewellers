@@ -9,7 +9,7 @@ import './App.css';
 import { Row, Col } from 'react-bootstrap';
 import InvoiceTable from './InvoiceTable';
 import Header from './Header';
-import { dropDownOptions } from './utils';
+import { dropDownOptions, jewelryTypeList, validateItem, branchList } from './utils';
 import "react-datepicker/dist/react-datepicker.css";
 import border from './image/border16.png';
 
@@ -17,9 +17,8 @@ import border from './image/border16.png';
 
 const App = () => {
   const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+  
+  console.log(componentRef.current,)
   const [formValues, setFormValues] = useState([{ name: "", quantity: "", weightInGrams: "", netWeightInGrams: "", itemTotal: "", purity: 18, stoneWeight: 0 }])
   const [goldPrice, setGoldPrice] = useState(localStorage.getItem('goldPrice'));
   const [isShowInvoice, setIsShowInvoice] = useState(false);
@@ -35,22 +34,40 @@ const App = () => {
   const [approveName, setApproveName] = useState('');
   const [shopPlace, setShopPlace] = useState('');
   const [accountNum, setAccountNum] = useState('');
+  const [errors, setErrors] = useState({});
+  const [isPrintOpen, setIsPrintOpen] = useState(false);
 
-  useEffect(() => {
-    const unloadCallback = (event) => {
-      const e = event || window.event;
-      e.preventDefault();
-      if (e) {
-        e.returnValue = ''
-      }
-      return '';
-    };
-    window.addEventListener("beforeunload", unloadCallback);
-    return () => {
-      window.removeEventListener("beforeunload", unloadCallback);
-    }
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    onBeforeGetContent: () => {
+      return new Promise((resolve) => {
+        setIsPrintOpen(true);
+        setTimeout(resolve, 100); // small delay ensures state is applied
+      });
+    },
+    onAfterPrint: () => setIsPrintOpen(false),
+  });
 
-  }, [])
+  // useEffect(() => {
+  //   // Triggered before print dialog opens
+  //   const handleBeforePrint = () => {
+  //     setIsPrintOpen(true)
+  //   };
+
+  //   // Triggered after print dialog closes
+  //   const handleAfterPrint = () => {
+  //     setIsPrintOpen(false);
+  //   };
+
+  //   window.addEventListener("beforeprint", handleBeforePrint);
+  //   window.addEventListener("afterprint", handleAfterPrint);
+
+  //   // Cleanup listeners on unmount
+  //   return () => {
+  //     window.removeEventListener("beforeprint", handleBeforePrint);
+  //     window.removeEventListener("afterprint", handleAfterPrint);
+  //   };
+  // }, []);
 
   const handleClose = () => setShow(false);
   const handleReset = () => {
@@ -64,7 +81,17 @@ const App = () => {
     let newFormValues = [...formValues];
     newFormValues[i][e.target.name] = e.target.value;
     setFormValues(newFormValues);
-  }
+  
+    // Clear error if value is now valid
+    let newErrors = { ...errors };
+    if (newErrors[i]?.[e.target.name]) {
+      delete newErrors[i][e.target.name];
+      if (Object.keys(newErrors[i]).length === 0) {
+        delete newErrors[i]; // remove entire item error if empty
+      }
+      setErrors(newErrors);
+    }
+  };
 
   const renderModal = () => {
     return (<>
@@ -87,32 +114,65 @@ const App = () => {
   const handleAmount = (i, e) => {
     let newFormValues = [...formValues];
     let regExp = new RegExp(/^\d*\.?\d*$/);
-    console.log(regExp.test(e.target.value), e.target.value)
+  
     if (!regExp.test(e.target.value)) {
       return;
     }
+  
     const n = e.target.value;
-    console.log(Number(n), 'bb123')
     newFormValues[i][e.target.name] = n;
+  
+    // --- Error handling ---
+    let newErrors = { ...errors };
+  
+    // Quantity validation
+    if (e.target.name === "quantity") {
+      if (!n || Number(n) <= 0) {
+        newErrors[i] = { ...newErrors[i], quantity: "Quantity must be greater than 0" };
+      } else {
+        if (newErrors[i]) {
+          delete newErrors[i].quantity;
+          if (Object.keys(newErrors[i]).length === 0) delete newErrors[i];
+        }
+      }
+    }
+  
+    // Gross Weight validation
+    if (e.target.name === "weightInGrams") {
+      if (!n || Number(n) <= 0) {
+        newErrors[i] = { ...newErrors[i], weightInGrams: "Gross Weight is required" };
+        newErrors[i] = { ...newErrors[i], netWeightInGrams: "Net Weight is required", itemTotal: "Item Total is required" };
+      } else {
+        if (newErrors[i]) {
+          delete newErrors[i].weightInGrams;
+          delete newErrors[i].netWeightInGrams;
+          delete newErrors[i].itemTotal;
+          if (Object.keys(newErrors[i]).length === 0) delete newErrors[i];
+        }
+      }
+    }
+  
+    setErrors(newErrors);
+  
+    // --- Your existing calculation logic ---
     const weightInGrams = newFormValues[i]['weightInGrams'] ?? 0;
     const purity = newFormValues[i]['purity'] ?? 0;
-    const g = Number(goldPrice)
+    const g = Number(goldPrice);
     const w = weightInGrams ? Number(weightInGrams)?.toFixed(3) : 0;
     const p = Number(purity);
     const goldPriceCartWise = Number(g * (p / 24))?.toFixed(3);
-
+  
     const stoneW = newFormValues[i]['stoneWeight'] ?? 0;
-    console.log(stoneW, 'pp123', w, w - stoneW)
     const stoneWeightNew = Number(stoneW);
     const netWeightItem = (w - stoneWeightNew?.toFixed(3))?.toFixed(3);
-
+  
     const itemTotal = (netWeightItem * (goldPriceCartWise / 10)) > 0 ? (netWeightItem * (goldPriceCartWise / 10)).toFixed(3) : '';
     newFormValues[i]['itemTotal'] = Number(itemTotal)?.toFixed(4);
-    newFormValues[i]['netWeightInGrams'] = netWeightItem
-
-    console.log(stoneW, 'pp123', netWeightItem)
+    newFormValues[i]['netWeightInGrams'] = netWeightItem;
+  
     setFormValues(newFormValues);
-  }
+  };
+  
 
   const addFormFields = () => {
     setIsShowInvoice(false);
@@ -180,15 +240,29 @@ const App = () => {
 
   const showInvoice = () => {
     setIsShowInvoiceToogle(true);
+  
+    let newErrors = {};
+    formValues.forEach((item, i) => {
+      const error = validateItem(item, i);
+      if (error) newErrors[i] = error;
+    });
+  
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setIsShowInvoice(false);
+      return;
+    }
+  
     const amount = getTotalAmount();
     if (amount > 0) {
       setIsShowInvoice(true);
       setIsShowInvoiceToogle(false);
-    }
-    else {
-      setIsShowInvoice(false)
+      setErrors({});
+    } else {
+      setIsShowInvoice(false);
     }
   }
+  
 
   console.log(isShowInvoiceToogle, grandTotal, getTotalAmount(), 'kk123')
 
@@ -204,6 +278,7 @@ const App = () => {
     setShow(true);
   }
   console.log(formValues, 'gh12')
+  console.log(isPrintOpen, 'kk123zz')
   return (
     <div className='container1'>
       <div ref={componentRef} className={`addSpace ${isShowInvoice ? `invoiceScreen2` : ``}`}>
@@ -232,6 +307,7 @@ const App = () => {
             <div className='gold'>
               <label>Current Gold Price</label>
               <input type="text" name="name" value={goldPrice} onChange={addGoldPrice} />
+              
             </div>
             <div className="ml-3 goldBtn updatePriceClass">
               <button className="button add updateBtn" type="button" disabled={goldPrice ? false : true} onClick={() => updateGoldPrice()}>{goldPrice ? 'Update Price' : 'Set price'}</button>
@@ -243,14 +319,27 @@ const App = () => {
                 <div className="col1" key={`${index}-name`}>
                   <div>
                     <label>Name </label>
-                    <input type="text" name="name" value={element?.name || ""} onChange={e => handleChange(index, e)} />
+                    <select 
+                      id="jewelry-select"
+                      name="name"
+                      value={element?.name || ""}
+                      onChange={e => handleChange(index, e)}
+                    >
+                      <option value="" disabled>-- (Select) --</option>
+                      {jewelryTypeList.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {item.label}
+                        </option>
+                      ))}
+                    </select>
+                    {errors[index]?.name && <p className="error">{errors[index].name}</p>}
                   </div>
                 </div>
                 <div className="col1" key={`${index}-quantity`}>
                   <div>
                     <label>Quantity</label>
                     <input type="text" className='quantity dField' min={0} name="quantity" value={element?.quantity} onChange={e => handleAmount(index, e)} />
-
+                    {errors[index]?.quantity && <p className="error">{errors[index].quantity}</p>}
                   </div>
                 </div>
 
@@ -258,7 +347,7 @@ const App = () => {
                   <div>
                     <label>Gross Weight in Gm</label>
                     <input type="text" name="weightInGrams" className='weightInGram dField' value={element?.weightInGrams || ""} onChange={e => handleAmount(index, e)} />
-
+                    {errors[index]?.weightInGrams && <p className="error">{errors[index].weightInGrams}</p>}
                   </div>
                 </div>
                 <div className="col1" key={`${index}-Stonesgm`}>
@@ -279,21 +368,21 @@ const App = () => {
                         dropDownOptions()?.map(item => <option key={item.value} value={item.value}>{item.label}</option>)
                       }
                     </select>
-
+                    {errors[index]?.purity && <p className="error">{errors[index].purity}</p>}
                   </div>
                 </div>
                 <div className="col1" key={`${index}-weightInGrams`}>
                   <div>
                     <label>Net Weight in gm</label>
                     <input type="text" name="netWeightInGrams" className='netWeightInGrams dField' value={element?.netWeightInGrams} readOnly />
-
+                    {errors[index]?.netWeightInGrams && <p className="error">{errors[index].netWeightInGrams}</p>}
                   </div>
                 </div>
                 <div className="col1 d-flex itemTotalD " key={`${index}-itemTotal`}>
                   <div>
                     <label>Item Total</label>
                     <input type="text" className='dField itemTotal' name="itemTotal" value={element?.itemTotal || ""} readOnly />
-
+                    {errors[index]?.itemTotal && <p className="error">{errors[index].itemTotal}</p>}
                   </div>
                   <div>
                     {
@@ -337,9 +426,35 @@ const App = () => {
             <div className='branchD mt-3'>
               <p> To Branch Manager</p>
               <p> State Bank of India</p>
-              <div className='branchDetails d-flex'>
-                <div className='col-3 place '> <input type="text" name="branchName" value={branchName} onChange={(e) => setBranchName(e?.target?.value)} /> </div>
-                <div className='col-6 ml8'>Branch</div>
+              <div className='col-12 branchDetails d-flex'>
+                <div className='col-9 place d-flex flex-row align-items-center'> 
+                {/* <input type="text" name="branchName" value={branchName} onChange={(e) => setBranchName(e?.target?.value)} />  */}
+                
+                  <div className='d-flex flex-row align-items-center'>
+                      <div>
+                        {isPrintOpen ? branchName :
+                            <select 
+                                id="branchName"
+                                name="branchName"
+                                value={branchName}
+                                className="onlyBorderBottom"
+                                onChange={(e) => setBranchName(e?.target?.value)}
+                              >
+                                  <option value="" disabled>-- (Select) --</option>
+                                      {branchList.map((item) => (
+                                        <option key={item.value} value={item.value}>
+                                          {item.value}
+                                        </option>
+                                      ))}
+                              </select> }
+                      </div>
+                      <div className='branchLabel ml-2'>Branch</div>     
+                    </div>
+                                     
+                </div>
+                
+                
+                
                 <div className='col-1 alignContentRight'><label>Acc No.</label></div>
                 <div className='col-2 accountNum place'>
                   <input type="text" name="accountNum" value={accountNum} onChange={(e) => setAccountNum(e?.target?.value)} />
@@ -377,11 +492,29 @@ const App = () => {
                 <p>I solemnly declare that weight, purity of the gold ornaments/precious stones indicated above are corrent and</p>
                 <p> I undertake to indemnify Bank against any loss it may sustain on account of abt inaccuracy in the above appraisal.</p>
               </div>
-              <div className='place mt-2'>
+              <div className='col-12 place mt-2  d-flex align-items-center'>
                 <label>Place:</label>
-                <input type="text" name="shopPlace" value={shopPlace} onChange={(e) => setShopPlace(e?.target?.value)} />
+                {/* <input type="text" name="shopPlace" value={shopPlace} onChange={(e) => setShopPlace(e?.target?.value)} /> */}
+                {isPrintOpen ? <div className='shopPlace'> {shopPlace} </div>:
+                
+                <div className='col-3 place mt-2 d-flex align-items-center'>
+                    <select 
+                          id="shopPlace"
+                          name="shopPlace"
+                          className="shopPlace onlyBorderBottom"
+                          value={shopPlace}
+                          onChange={(e) => setShopPlace(e?.target?.value)}
+                        >
+                          <option value="" disabled>-- (Select) --</option>
+                          {branchList.map((item) => (
+                            <option key={item.value} value={item.value}>
+                              {item.value}
+                            </option>
+                          ))}
+                        </select></div>
+                }
               </div>
-              <div className='place mt-2'>
+              <div className='place mt-2 d-flex align-items-center'>
                 <label>Date:</label>
                 {/* <Form.Control
                   type="date"
@@ -391,7 +524,7 @@ const App = () => {
                   className="datepic"
                   onChange={(e) => setDate(e.target.value)}
                 /> */}
-                <DatePicker selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/yyyy" />
+                <DatePicker className={isPrintOpen ? 'hideBorder shopPlace' : 'shopPlace'} selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/yyyy" />
               </div>
 
               <div className='mt-3 d-flex'>
