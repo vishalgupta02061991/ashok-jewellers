@@ -115,7 +115,7 @@ body {
   font-weight: 700;
 }
 
-input[type=text] {
+input[type=text], select {
 
   margin-left: 10px;
   vertical-align: middle;
@@ -542,6 +542,20 @@ th,
   padding-right: 15%;
 }
 
+@media only screen and (max-width: 450px) and (min-width: 100px) {
+  .mobileGstContainer {
+    display: block !important;
+    text-align: center;
+  }
+
+  .mobileGST,
+  .annexure {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+}
+
 @media only screen and (max-width: 500px) and (min-width: 100px) {
   .col1 {
     width: 100% !important;
@@ -559,22 +573,27 @@ th,
   .addSpace {
     padding: 25px;
   }
+
   .headerLogo {
     flex-direction: column !important;
   }
+
   .mr-2 {
     margin-right: 0px;
   }
+
   .paddingRight15 {
     padding-right: 0px;
   }
+
   .companyName {
     width: 100%;
   }
+
   .container1 {
     margin-top: 0px;
   }
-  
+
 }
 
 .imageClass {
@@ -589,6 +608,22 @@ th,
   flex-direction: row;
 }
 
+.shopPlace {
+  margin-left: 10px !important;
+}
+
+/* .onlyBorderBottom {
+  border: 0;
+  border-bottom: 1px dotted;
+} */
+
+.branchLabel {
+  margin-left: 2rem;
+}
+
+.hideBorder {
+  border: none !important;
+}
 /* 
 .aa:after {
   content: "";

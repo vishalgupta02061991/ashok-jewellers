@@ -21,7 +21,7 @@ const Header = () => {
              */}
             </div>
             <div className='d-flex mobileGstContainer'>
-                <div className=' mt-2 col-9'>
+                <div className=' mt-2 col-9 mobileGST'>
                     <div className='mobile'>
                         Mobile No : 9161626642
                     </div>
@@ -29,7 +29,7 @@ const Header = () => {
                         GSTIN : 09BKUPS4358G1ZC
                     </div>
                 </div>
-                <div className='textRight mt-2 col-3'>
+                <div className='textRight mt-2 col-3 annexure'>
                     Annexure - PL-61(I)
                 </div>
             </div>
