@@ -53,7 +53,7 @@ export const getCount = (name, items) => {
 export const validateItem = (item) => {
   let error = {};
   console.log(item,'ii123', (!item.weightInGrams || Number(item.weightInGrams) <= 0))
-  if (!item.name || item.name.trim() === "") {
+  if (!item.name || item.name?.length === 0) {
     error.name = "Name is required";
   }
   if (!item.quantity || Number(item.quantity) <= 0) {

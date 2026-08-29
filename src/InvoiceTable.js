@@ -25,8 +25,8 @@ const InvoiceTable = ({ formValues, getTotalAmount, grandTotal }) => {
                             if (item.name && item.quantity && item.weightInGrams) {
                                 return (
                                     <tr key={i + 1}>
-                                        <td>{i + 1}</td>
-                                        <td>{item.name}</td>
+                                        <td>{i + 1}{}</td>
+                                        <td>{item.name ? item.name.map((type) => type.value).join(', ') : ''}</td>
                                         <td>{Number(item.quantity).toFixed(2)} Pc</td>
                                         <td>{Number(item?.weightInGrams)?.toFixed(3)}</td>
 

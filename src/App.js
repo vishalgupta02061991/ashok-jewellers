@@ -12,6 +12,7 @@ import Header from './Header';
 import { dropDownOptions, jewelryTypeList, validateItem, branchList } from './utils';
 import "react-datepicker/dist/react-datepicker.css";
 import border from './image/border16.png';
+import Select from 'react-select';
 
 //https://github.com/vishalgupta02061991/ashok-jewellers/settings/pages
 
@@ -77,6 +78,22 @@ const App = () => {
     setIsShowInvoiceToogle(false);
     setShow(false)
   }
+
+  const onGoldItemChange = (selectedGoldItem, i) => {
+    console.log(i, selectedGoldItem, 'gg123')
+    let newFormValues = [...formValues];
+    newFormValues[i]['name'] = selectedGoldItem || [];
+    setFormValues(newFormValues);
+    let newErrors = { ...errors };
+    if (newErrors[i]?.['name'] && newErrors[i]?.['name'].length) {
+      delete newErrors[i]['name'];
+      if (Object.keys(newErrors[i]).length === 0) {
+        delete newErrors[i]; // remove entire item error if empty
+      }
+      setErrors(newErrors);
+    }
+  }
+
   const handleChange = (i, e) => {
     let newFormValues = [...formValues];
     newFormValues[i][e.target.name] = e.target.value;
@@ -319,7 +336,7 @@ const App = () => {
                 <div className="col1" key={`${index}-name`}>
                   <div>
                     <label>Name </label>
-                    <select 
+                    {/* <select 
                       id="jewelry-select"
                       name="name"
                       value={element?.name || ""}
@@ -331,7 +348,17 @@ const App = () => {
                           {item.label}
                         </option>
                       ))}
-                    </select>
+                    </select> */}
+                    <Select
+                      id="jewelry-select"
+                      isMulti
+                      name="name"
+                      options={jewelryTypeList}
+                      value={element?.name.length ? element?.name : []}
+                      onChange={(options) => onGoldItemChange(options, index)}
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                    />
                     {errors[index]?.name && <p className="error">{errors[index].name}</p>}
                   </div>
                 </div>
